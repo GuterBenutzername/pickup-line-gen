@@ -1,13 +1,12 @@
-import { useState } from 'react'
-import './App.css'
+import Generator from "./Generator/Generator";
+import "./App.css";
 
 function App() {
-
   return (
     <div className="App">
-      <p>Hello!</p>
+      <Generator />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
