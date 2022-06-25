@@ -1,12 +1,33 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import TextField from "@mui/material/textfield";
 import FieldData from "./FieldData";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
+import produce from "immer";
 
 type Props = {};
 
 const InputHell = (props: Props) => {
+  const [InputHellState, setInputHell] = useState({
+    crusheeName: "",
+    crusheeGender: "",
+    crusheeLikes: "",
+    crusheeHairColor: "",
+    crusheeEyeColor: "",
+    crusherName: "",
+    crusherGender: "",
+    crusherLikes: "",
+  });
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    toModify: string
+  ) => {
+    const nextState = produce(InputHellState, (draft) => {
+      // @ts-ignore: ts(7053)
+      draft[toModify] = event.target.value;
+    });
+    setInputHell(nextState);
+  };
   return (
     <Stack
       direction="row"
@@ -32,6 +53,11 @@ const InputHell = (props: Props) => {
                   name={data.name as string}
                   placeholder={data.placeholder as string}
                   label={data.label}
+                  // @ts-ignore: ts(7053)
+                  value={InputHellState[data.name as string]}
+                  onChange={(e) => {
+                    handleInputChange(e, data.name as string);
+                  }}
                   key={index}
                 />
               );
@@ -58,6 +84,11 @@ const InputHell = (props: Props) => {
                   margin="normal"
                   name={data.name as string}
                   placeholder={data.placeholder as string}
+                  // @ts-ignore: ts(7053)
+                  value={InputHellState[data.name as string]}
+                  onChange={(e) => {
+                    handleInputChange(e, data.name as string);
+                  }}
                   label={data.label}
                   key={index}
                 />
