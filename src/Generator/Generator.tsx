@@ -5,7 +5,7 @@ import InputHell from "./InputHell/InputHell";
 
 type Props = {};
 
-const Generator = (_props: Props) => {
+const Generator = () => {
   return (
     <Stack
       direction="row"

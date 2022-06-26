@@ -1,16 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import TextField from "@mui/material/textfield";
 import FieldData from "./FieldData";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
-import produce from "immer";
 import { useSelector, useDispatch } from "react-redux";
 import { handleInputHellChange } from "../../redux/inputHell";
 import { RootState } from "../../redux/store";
 
-type Props = {};
-
-const InputHell = (_props: Props) => {
+const InputHell = () => {
   const InputHellState = useSelector((state: RootState) => state.inputHell);
   const dispatch = useDispatch();
   const handleInputChange = (
@@ -49,6 +46,7 @@ const InputHell = (_props: Props) => {
                   onChange={(e) => {
                     handleInputChange(e, data.name as string);
                   }}
+                  // skipcq: JS-0437
                   key={index}
                 />
               );
@@ -81,6 +79,7 @@ const InputHell = (_props: Props) => {
                     handleInputChange(e, data.name as string);
                   }}
                   label={data.label}
+                  // skipcq: JS-0437
                   key={index}
                 />
               );
