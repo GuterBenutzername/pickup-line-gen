@@ -1,4 +1,11 @@
-const FieldData = [
+type Fields = {
+    name: string,
+    label: string,
+    placeholder: string,
+    optional: boolean
+}[]
+
+const FieldData: Fields = [
   {
     name: "crusheeName",
     label: "Your crush's name",

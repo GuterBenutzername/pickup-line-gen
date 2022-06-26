@@ -4,29 +4,20 @@ import FieldData from "./FieldData";
 import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 import produce from "immer";
+import { useSelector, useDispatch } from "react-redux";
+import { handleInputHellChange } from "../../redux/inputHell";
+import { RootState } from "../../redux/store";
 
 type Props = {};
 
-const InputHell = (props: Props) => {
-  const [InputHellState, setInputHell] = useState({
-    crusheeName: "",
-    crusheeGender: "",
-    crusheeLikes: "",
-    crusheeHairColor: "",
-    crusheeEyeColor: "",
-    crusherName: "",
-    crusherGender: "",
-    crusherLikes: "",
-  });
+const InputHell = (_props: Props) => {
+  const InputHellState = useSelector((state: RootState) => state.inputHell);
+  const dispatch = useDispatch();
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     toModify: string
   ) => {
-    const nextState = produce(InputHellState, (draft) => {
-      // @ts-ignore: ts(7053)
-      draft[toModify] = event.target.value;
-    });
-    setInputHell(nextState);
+    dispatch(handleInputHellChange({ [toModify]: event.target.value }));
   };
   return (
     <Stack
